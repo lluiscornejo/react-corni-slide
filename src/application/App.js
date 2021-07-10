@@ -51,7 +51,7 @@ const config = {
 };
 
 const totalItems = [...Array(20).keys()];
-const data = totalItems.map((item, idx) => ({ title: `Title ${idx +1}`, description: `Description ${idx +1}` }));
+const data = totalItems.map((item, idx) => ({ title: `Title ${idx + 1}`, description: `Description ${idx + 1}` }));
 
 const App = () => (
   <>
