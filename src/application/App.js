@@ -18,6 +18,14 @@ const config = {
       nextVisibleItemWidth: 50,
       animationVelocity: 300,
     },
+    414: {
+      itemsToShow: 2,
+      itemsToSlide: 1,
+      gutter: 5,
+      showDots: true,
+      nextVisibleItemWidth: 50,
+      animationVelocity: 300,
+    },
     767: {
       itemsToShow: 3,
       itemsToSlide: 1,
