@@ -104,7 +104,7 @@ const Slider = ({ config, data, component: Component }) => {
     scrollLeft(rootRef.current, displacement, animationVelocity);
   };
 
-  const handleHorizontalScroll = (e) => {
+  const handleMouseWheel = (e) => {
     if (e.deltaX) {
       setFixedPosition(false);
       getCurrentIndex();
@@ -147,7 +147,7 @@ const Slider = ({ config, data, component: Component }) => {
     <Root>
       <Container
         ref={rootRef}
-        onWheel={handleHorizontalScroll}
+        onWheel={handleMouseWheel}
         onTouchMove={handleTouchScroll}
         onScroll={handleScroll}
         onMouseEnter={handleMouseEnter}
