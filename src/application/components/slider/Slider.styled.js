@@ -1,10 +1,18 @@
 import styled, { css } from 'styled-components';
 
-const buttonsStyles = css`
+const containerButtonsStyles = css`
   position: absolute;
   cursor: pointer;
   top: 50%;
   transform: translateY(-50%);
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+`;
+
+const buttonsStyles = css`
   color: red;
   font-size: 20px;
 `;
@@ -35,12 +43,22 @@ export const ListItem = styled.li`
   min-width: ${({ width }) => width}px;
 `;
 
+export const LeftButtonContainer = styled.div`
+  ${containerButtonsStyles};
+  left: 0;
+  display: ${({ hidden }) => hidden ? 'none' : 'flex'};
+`;
+
+export const RightButtonContainer = styled.div`
+  ${containerButtonsStyles};
+  right: 0;
+  display: ${({ hidden }) => hidden ? 'none' : 'flex'};
+`;
+
 export const LeftButton = styled.div`
   ${buttonsStyles};
-  left: 0;
 `;
 
 export const RightButton = styled.div`
   ${buttonsStyles};
-  right: 0;
 `;

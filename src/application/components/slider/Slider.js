@@ -1,12 +1,15 @@
 import { useRef, useEffect, useState } from 'react';
 import { scrollLeft } from '@Application/utils/scroll-left';
 import { formatNumber } from '@Application/utils/numbers';
+import { useResize } from '@Application/hooks/use-resize';
 import Dots from './components/dots';
 import {
   Root,
   Container,
   List,
   ListItem,
+  LeftButtonContainer,
+  RightButtonContainer,
   LeftButton,
   RightButton,
 } from './Slider.styled';
@@ -18,6 +21,10 @@ const Slider = ({ config, data, component: Component }) => {
   const [fixedPosition, setFixedPosition] = useState(true);
   const [dots, setDots] = useState(0);
   const [activeDot, setActiveDot] = useState(0);
+  const [sliderConfig, setSliderConfig] = useState(config);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [hideArrows, setHideArrows] = useState(true);
   const {
     itemsToShow,
     gutter,
@@ -26,13 +33,30 @@ const Slider = ({ config, data, component: Component }) => {
     showDots,
     dotsStyles,
     animationVelocity,
-  } = config;
+    showArrows = true,
+    arrows,
+  } = sliderConfig;
+  const setResponsiveConfig = (responsiveData) => {
+    const breakpoints = Object.keys(responsiveData).map((item) => Number(item));
+    const windowWidth = window.innerWidth;
+    const orderedResponsive = breakpoints.sort((a, b) => b - a);
+    const currentBreakpoint = orderedResponsive.find((item) => Number(item) <= windowWidth);
+    const responsiveConfig = responsiveData[currentBreakpoint];
+    const { responsive, ...restConfig } = config;
+    setSliderConfig({ ...restConfig, ...responsiveConfig });
+  };
+  useResize(() => {
+    const { responsive } = config;
+    if (responsive) setResponsiveConfig(responsive);
+  }, [config.responsive]);
   useEffect(() => {
+    const { responsive } = config;
+    if (responsive) setResponsiveConfig(responsive);
     if (showDots) {
-      const dots = Math.ceil(data.length / itemsToShow);
+      const dots = Math.ceil(((data.length - (itemsToShow - 1)) / itemsToSlide));
       setDots(dots);
     }
-  }, []);
+  }, [itemsToShow, config.responsive]);
   useEffect(() => {
     if (rootRef.current) {
       const rootWidth = rootRef.current.offsetWidth;
@@ -41,7 +65,7 @@ const Slider = ({ config, data, component: Component }) => {
       const calculatedScrollPosition = calculatedItemWidth * itemsToSlide;
       setScrollPosition(calculatedScrollPosition);
     }
-  }, [rootRef.current]);
+  }, [rootRef.current, sliderConfig]);
 
   const getCurrentIndex = () => {
     const { scrollLeft } = rootRef.current;
@@ -62,7 +86,7 @@ const Slider = ({ config, data, component: Component }) => {
     }
     setFixedPosition(true);
     const index = ((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex;
-    if (data.length >= index && index >= 0) {
+    if (data.length > index && index >= 0) {
       const fixedDisplacement = listItems[((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex].getBoundingClientRect().left;
       return isRightDirection ? fixedDisplacement : -fixedDisplacement;
     }
@@ -92,6 +116,16 @@ const Slider = ({ config, data, component: Component }) => {
     getCurrentIndex();
   };
 
+  const handleScroll = () => {
+    const { scrollLeft } = rootRef.current;
+    const isScrollEnd = Math.ceil(scrollLeft) >= (itemWidth * data.length) - ((itemWidth * itemsToShow) + nextVisibleItemWidth);
+    getCurrentIndex();
+    if (isScrollEnd) setShowRightArrow(false);
+    else setShowRightArrow(true);
+    if (scrollLeft === 0) setShowLeftArrow(false);
+    else setShowLeftArrow(true);
+  };
+
   const handleClickedDot = (index) => {
     const listItems = rootRef.current.children[0].children;
     if (data.length >= index && index >= 0) {
@@ -101,9 +135,25 @@ const Slider = ({ config, data, component: Component }) => {
     }
   };
 
+  const handleMouseEnter = () => {
+    setHideArrows(false);
+  };
+
+  const handleMouseLeave = () => {
+    setHideArrows(true);
+  };
+
   return (
     <Root>
-      <Container ref={rootRef} onWheel={handleHorizontalScroll} onTouchMove={handleTouchScroll} onScroll={getCurrentIndex}>
+      <Container
+        ref={rootRef}
+        onWheel={handleHorizontalScroll}
+        onTouchMove={handleTouchScroll}
+        onScroll={handleScroll}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleMouseEnter}
+      >
         <List>
           {data.map((item, idx) => (
             <ListItem key={idx} width={itemWidth} gutter={gutter}>
@@ -111,8 +161,20 @@ const Slider = ({ config, data, component: Component }) => {
             </ListItem>
           ))}
         </List>
-        <LeftButton onClick={handleLeftDirection}>&lt;</LeftButton>
-        <RightButton onClick={handleRightDirection}>&gt;</RightButton>
+        {showArrows && (
+          <>
+            <LeftButtonContainer hidden={!showLeftArrow || hideArrows}>
+              <LeftButton onClick={handleLeftDirection}>
+                {arrows ? arrows.left : '&lt;'}
+              </LeftButton>
+            </LeftButtonContainer>
+            <RightButtonContainer hidden={!showRightArrow || hideArrows}>
+              <RightButton onClick={handleRightDirection}>
+                {arrows ? arrows.right : '&gt;'}
+              </RightButton>
+            </RightButtonContainer>
+          </>
+        )}
       </Container>
       {showDots && <Dots styles={dotsStyles} items={dots} activeDot={activeDot} onClick={handleClickedDot} />}
     </Root>
