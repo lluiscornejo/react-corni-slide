@@ -60,6 +60,7 @@ Carousel.args = {
       left: <div>L</div>,
       right: <div>R</div>,
     },
+    ssr: 1024,
   },
   data,
   component: Card,

@@ -48,6 +48,7 @@ const config = {
     left: <div>L</div>,
     right: <div>R</div>,
   },
+  ssr: 1024,
 };
 
 const totalItems = [...Array(20).keys()];

@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { scrollLeft } from '@Application/utils/scroll-left';
 import { formatNumber } from '@Application/utils/numbers';
+import { isServer } from '@Application/utils/server';
 import { useResize } from '@Application/hooks/use-resize';
 import Dots from './components/dots';
 import {
@@ -35,11 +36,12 @@ const Slider = ({ config, data, component: Component }) => {
     animationVelocity,
     showArrows = true,
     arrows,
+    ssr,
   } = sliderConfig;
   const setResponsiveConfig = (responsiveData) => {
     const breakpoints = Object.keys(responsiveData).map((item) => Number(item));
-    const windowWidth = window.innerWidth;
     const orderedResponsive = breakpoints.sort((a, b) => b - a);
+    const windowWidth = !isServer ? window.innerWidth : (ssr || orderedResponsive[0]);
     const currentBreakpoint = orderedResponsive.find((item) => Number(item) <= windowWidth);
     const responsiveConfig = responsiveData[currentBreakpoint];
     const { responsive, ...restConfig } = config;
@@ -137,13 +139,9 @@ const Slider = ({ config, data, component: Component }) => {
     }
   };
 
-  const handleMouseEnter = () => {
-    setHideArrows(false);
-  };
+  const handleMouseEnter = () => setHideArrows(false);
 
-  const handleMouseLeave = () => {
-    setHideArrows(true);
-  };
+  const handleMouseLeave = () => setHideArrows(true);
 
   return (
     <Root>
