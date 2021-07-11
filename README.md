@@ -1,6 +1,94 @@
-# Getting Started with Create React App
+# React Corni Slider
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+
+Native horizontal scrolling carousel. Allows scrolling without added animations.
+The configuration enables a number of configuration options.
+
+## The component
+
+```jsx
+  <Slider config={config} data={data} component={Card} />
+```
+
+### Configuration
+
+| Property | Description   | Type  | Default value  |
+|---|---|---|---|
+| itemsToShow  | Visible items  | Number  | 1  |
+| itemsToSlide  | Items that will slide  | Number  | 1  |
+| gutter  | Horizontal padding for each item  | Number  | 0  |
+| showDots  | Show dots for block navigation  | Boolean  | false  |
+| dotsStyles  | Style for dots  | Object  |   |
+| nextVisibleItemWidth  | Show the a part of the next item after the number of items selected as itemsToShow. The value will be in px  | Number  | 0  |
+| animationVelocity  | Animation in ms  | Number  | 300  |
+| responsive  | It's possible to define a configuration by breakpoint. This configuration will have the previous properties  | Object  |   |
+| showArrow  | Show the arrows button. You can style  | Boolean  | true  |
+| arrows  | Pass the component to customize each arrow: left and right  | Object  | < and >  |
+
+#### Example
+
+```js
+const config = {
+  itemsToShow: 3,
+  itemsToSlide: 3,
+  gutter: 10,
+  showDots: true,
+  dotsStyles: {},
+  nextVisibleItemWidth: 100,
+  animationVelocity: 300,
+  responsive: {
+    0: {
+      itemsToShow: 1,
+      itemsToSlide: 1,
+      gutter: 5,
+      showDots: true,
+      nextVisibleItemWidth: 50,
+      animationVelocity: 300,
+    },
+    414: {
+      itemsToShow: 2,
+      itemsToSlide: 1,
+      gutter: 5,
+      showDots: true,
+      nextVisibleItemWidth: 50,
+      animationVelocity: 300,
+    },
+    767: {
+      itemsToShow: 3,
+      itemsToSlide: 1,
+      gutter: 10,
+      showDots: true,
+      nextVisibleItemWidth: 75,
+      animationVelocity: 500,
+    },
+    1024: {
+      itemsToShow: 5,
+      itemsToSlide: 5,
+      gutter: 10,
+      showDots: true,
+      nextVisibleItemWidth: 100,
+      animationVelocity: 500,
+    },
+  },
+  showArrows: true,
+  arrows: {
+    left: <div>L</div>,
+    right: <div>R</div>,
+  },
+  ssr: 1024,
+};
+```
+
+### Data
+
+It is the array you need to pass to create the list of items. Each item will be an object with the properties you need to pass to your component.
+
+### Component
+
+The component o card to show inside de carousel.
+
+-------
 
 ## Available Scripts
 
@@ -11,33 +99,19 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `yarn eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ### `yarn storybook`
 
@@ -47,36 +121,8 @@ Run storybook in 6006 port.
 
 Build the storybook.
 
-### `yarn build-storybook`
+### `yarn deploy-storybook`
 
-Deploy to Git hub pages the storybook.
+Deploy to Git hub pages the storybook. Previously you need to build storybook.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

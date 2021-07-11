@@ -55,7 +55,7 @@ Carousel.args = {
         animationVelocity: 500,
       },
     },
-    showArrow: true,
+    showArrows: false,
     arrows: {
       left: <div>L</div>,
       right: <div>R</div>,

@@ -27,10 +27,10 @@ const Slider = ({ config, data, component: Component }) => {
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [hideArrows, setHideArrows] = useState(true);
   const {
-    itemsToShow,
-    gutter,
-    nextVisibleItemWidth,
-    itemsToSlide,
+    itemsToShow = 1,
+    gutter = 0,
+    nextVisibleItemWidth = 0,
+    itemsToSlide = 1,
     showDots,
     dotsStyles,
     animationVelocity,

@@ -7,6 +7,7 @@ const config = {
   itemsToSlide: 3,
   gutter: 10,
   showDots: true,
+  dotsStyles: {},
   nextVisibleItemWidth: 100,
   animationVelocity: 300,
   responsive: {
