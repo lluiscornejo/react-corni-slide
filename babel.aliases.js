@@ -3,7 +3,5 @@
 System.config({
   paths: {
     '@Application/*': './src/application/*',
-    '@Common/*': './src/common/*',
-    '@Config/*': './src/application/config/*',
   },
 });
