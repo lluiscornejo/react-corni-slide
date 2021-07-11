@@ -87,7 +87,8 @@ const Slider = ({ config, data, component: Component }) => {
     setFixedPosition(true);
     const index = ((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex;
     if (data.length > index && index >= 0) {
-      const fixedDisplacement = listItems[((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex].getBoundingClientRect().left;
+      const rootLeft = rootRef.current.getBoundingClientRect().left;
+      const fixedDisplacement = listItems[((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex].getBoundingClientRect().left - rootLeft;
       return isRightDirection ? fixedDisplacement : -fixedDisplacement;
     }
     return scrollPosition;
@@ -129,7 +130,8 @@ const Slider = ({ config, data, component: Component }) => {
   const handleClickedDot = (index) => {
     const listItems = rootRef.current.children[0].children;
     if (data.length >= index && index >= 0) {
-      const displacement = listItems[index * itemsToSlide].getBoundingClientRect().left;
+      const rootLeft = rootRef.current.getBoundingClientRect().left;
+      const displacement = listItems[index * itemsToSlide].getBoundingClientRect().left - rootLeft;
       scrollLeft(rootRef.current, displacement, animationVelocity);
       scrollLeft(rootRef.current, displacement, animationVelocity);
     }
