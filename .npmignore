@@ -5,6 +5,9 @@
 /storybook-static
 /webpack-stats.json
 /stats.json
+/src
+/.storybook
+/public
 
 .DS_Store
 .vscode

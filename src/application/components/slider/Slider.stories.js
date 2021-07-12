@@ -65,3 +65,10 @@ Carousel.args = {
   data,
   component: Card,
 };
+
+export const DefaultCarousel = Template.bind({});
+DefaultCarousel.args = {
+  config: {},
+  data,
+  component: Card,
+};

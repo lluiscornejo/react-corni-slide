@@ -1,14 +1,14 @@
 {
   "name": "react-corni-slider",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Native horizontal scrolling carousel",
   "main": "./dist/index.js",
   "types": "./lib/index.js",
   "homepage": "https://lluiscornejo.github.io/react-corni-slide",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist lib",
     "start": "cross-env NODE_ENV=development webpack --watch",
-    "build": "cross-env NODE_ENV=production webpack && babel ./src --out-dir ./lib",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack && babel ./src --out-dir ./lib",
     "test-watch": "jest --watch",
     "test": "jest",
     "test-coverage": "jest --coverage --passWithNoTests",

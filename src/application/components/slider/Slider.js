@@ -3,6 +3,7 @@ import { scrollLeft } from '@Application/utils/scroll-left';
 import { formatNumber } from '@Application/utils/numbers';
 import { isServer } from '@Application/utils/server';
 import { useResize } from '@Application/hooks/use-resize';
+import { isEmptyObject } from '@Application/utils/object';
 import Dots from './components/dots';
 import {
   Root,
@@ -15,14 +16,24 @@ import {
   RightButton,
 } from './Slider.styled';
 
-const Slider = ({ config, data, component: Component }) => {
+const defaultConfig = {
+  itemsToShow: 1,
+  gutter: 0,
+  nextVisibleItemWidth: 0,
+  itemsToSlide: 1,
+  showDots: true,
+  animationVelocity: 300,
+  showArrows: true,
+};
+
+const Slider = ({ config = {}, data = [], component: Component }) => {
   const rootRef = useRef(null);
   const [itemWidth, setItemWidth] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [fixedPosition, setFixedPosition] = useState(true);
   const [dots, setDots] = useState(0);
   const [activeDot, setActiveDot] = useState(0);
-  const [sliderConfig, setSliderConfig] = useState(config);
+  const [sliderConfig, setSliderConfig] = useState(((!isEmptyObject(config)) && config) || defaultConfig);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [hideArrows, setHideArrows] = useState(true);
@@ -165,12 +176,12 @@ const Slider = ({ config, data, component: Component }) => {
           <>
             <LeftButtonContainer hidden={!showLeftArrow || hideArrows}>
               <LeftButton onClick={handleLeftDirection}>
-                {arrows ? arrows.left : '&lt;'}
+                {arrows ? arrows.left : '<'}
               </LeftButton>
             </LeftButtonContainer>
             <RightButtonContainer hidden={!showRightArrow || hideArrows}>
               <RightButton onClick={handleRightDirection}>
-                {arrows ? arrows.right : '&gt;'}
+                {arrows ? arrows.right : '>'}
               </RightButton>
             </RightButtonContainer>
           </>
