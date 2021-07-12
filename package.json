@@ -15,7 +15,7 @@
     "lint": "eslint 'src/**/*.{js,jsx}' --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o public",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "deploy-storybook": "gh-pages -d public"
   },
   "peerDependencies": {
     "react": "^17.0.2",
