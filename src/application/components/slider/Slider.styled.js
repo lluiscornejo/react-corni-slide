@@ -38,7 +38,9 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  padding: ${({ gutter }) => `0 ${gutter}px`};
+  &:not(:last-child) {
+    margin-right: ${({ gutter }) => `${gutter}px`};
+  }
   width: ${({ width }) => width}px;
   min-width: ${({ width }) => width}px;
 `;

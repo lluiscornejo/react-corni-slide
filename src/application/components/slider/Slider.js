@@ -69,7 +69,7 @@ const Slider = ({ config = {}, data = [], component: Component }) => {
       const dots = Math.ceil(((data.length - (itemsToShow - 1)) / itemsToSlide));
       setDots(dots);
     }
-  }, [itemsToShow, config.responsive]);
+  }, [itemsToShow, itemsToSlide, config.responsive]);
   useEffect(() => {
     if (rootRef.current) {
       const rootWidth = rootRef.current.offsetWidth;
@@ -83,25 +83,25 @@ const Slider = ({ config = {}, data = [], component: Component }) => {
   const getCurrentIndex = () => {
     const { scrollLeft } = rootRef.current;
     const displacement = itemWidth * itemsToSlide;
-    const currentIndex = Math.round(formatNumber(scrollLeft / displacement));
+    const currentIndex = Math.floor(formatNumber(scrollLeft / displacement));
     setActiveDot(currentIndex);
     return currentIndex;
   };
 
   const getDisplacement = (direction, scrollPosition) => {
     const isRightDirection = direction === 'right';
-    const extraIndex = isRightDirection ? 0 : itemsToSlide;
-    const extraCurrentIndex = isRightDirection ? 1 : 0;
+    const indexToSlide = isRightDirection ? 0 : itemsToSlide;
+    const extraIndex = isRightDirection ? 1 : 0;
     const listItems = rootRef.current.children[0].children;
     const currentIndex = getCurrentIndex();
+
     if (fixedPosition) {
       return scrollPosition;
     }
-    setFixedPosition(true);
-    const index = ((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex;
+    const index = ((currentIndex + extraIndex) * itemsToSlide) - indexToSlide;
     if (data.length > index && index >= 0) {
       const rootLeft = rootRef.current.getBoundingClientRect().left;
-      const fixedDisplacement = listItems[((currentIndex + extraCurrentIndex) * itemsToSlide) - extraIndex].getBoundingClientRect().left - rootLeft;
+      const fixedDisplacement = listItems[index].getBoundingClientRect().left - rootLeft;
       return isRightDirection ? fixedDisplacement : -fixedDisplacement;
     }
     return scrollPosition;
@@ -141,11 +141,10 @@ const Slider = ({ config = {}, data = [], component: Component }) => {
   };
 
   const handleClickedDot = (index) => {
-    const listItems = rootRef.current.children[0].children;
     if (data.length >= index && index >= 0) {
+      const listItems = rootRef.current.children[0].children;
       const rootLeft = rootRef.current.getBoundingClientRect().left;
       const displacement = listItems[index * itemsToSlide].getBoundingClientRect().left - rootLeft;
-      scrollLeft(rootRef.current, displacement, animationVelocity);
       scrollLeft(rootRef.current, displacement, animationVelocity);
     }
   };
