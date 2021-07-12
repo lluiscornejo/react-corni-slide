@@ -2,13 +2,9 @@
 /node_modules
 /test-coverage
 /coverage
-/dist
-/lib
-/public
 /storybook-static
 /webpack-stats.json
 /stats.json
 
 .DS_Store
 .vscode
-.prettierrc

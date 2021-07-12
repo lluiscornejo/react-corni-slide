@@ -26,7 +26,7 @@ Carousel.args = {
         itemsToShow: 1,
         itemsToSlide: 1,
         gutter: 5,
-        showDots: true,
+        showDots: false,
         nextVisibleItemWidth: 50,
         animationVelocity: 300,
       },
