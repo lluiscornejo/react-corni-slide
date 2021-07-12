@@ -5,6 +5,10 @@
 Native horizontal scrolling carousel. Allows scrolling without added animations.
 The configuration enables a number of configuration options.
 
+## Demo
+
+[Demo](https://lluiscornejo.github.io/react-corni-slide)
+
 ## The component
 
 ```jsx
@@ -94,34 +98,23 @@ The component o card to show inside de carousel.
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm run build`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Builds the app before publish to npm js.
 
-### `yarn test`
+### `npm run test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-### `yarn storybook`
+### `npm run storybook`
 
 Run storybook in 6006 port.
 
-### `yarn build-storybook`
+### `npm run build-storybook`
 
 Build the storybook.
 
-### `yarn deploy-storybook`
+### `npm run deploy-storybook`
 
 Deploy to Git hub pages the storybook. Previously you need to build storybook.
 

@@ -4,6 +4,7 @@ export const debounce = (callback, wait) => {
     clearTimeout(timerId);
     timerId = setTimeout(() => {
       callback(...args);
+      // eslint-disable-next-line testing-library/await-async-utils
     }, wait);
   };
 };

@@ -5,16 +5,19 @@
     "mocha": true,
     "jest": true
   },
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react"
+  ],
   "globals": {
     "window": true,
     "document": true
   },
-  "plugins": ["react-hooks"],
+  "plugins": ["react-hooks", "testing-library", "jest-dom"],
   "rules": {
     // Common
     "import/no-unresolved": "off",
-    "no-nested-ternary": "off",
     "consistent-return": "off",
     "import/no-named-as-default": "off",
     "import/no-extraneous-dependencies": "off",
@@ -27,8 +30,7 @@
     "no-shadow": "off",
     "no-confusing-arrow": "off",
     "object-curly-newline": "off",
-    "arrow-parens": "off",
-    "jsx-a11y/media-has-caption" : "off",
+    "implicit-arrow-linebreak": "off",
 
     //JSX
     "jsx-a11y/no-noninteractive-element-interactions": "off",
@@ -49,10 +51,13 @@
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-no-target-blank": "off",
+    "react/destructuring-assignment": "off",
     "react/prop-types": "off",
     "react/prefer-stateless-function": "off",
     "react/no-find-dom-node": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-one-expression-per-line": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off"
   }
