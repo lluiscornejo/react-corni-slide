@@ -133,18 +133,6 @@ module.exports = {
       amd: 'react-dom',
       root: 'react-dom',
     },
-    'prop-types': {
-      commonjs: 'prop-types',
-      commonjs2: 'prop-types',
-      amd: 'prop-types',
-      root: 'prop-types',
-    },
-    '@material-ui/core': {
-      commonjs: '@material-ui/core',
-      commonjs2: '@material-ui/core',
-      amd: '@material-ui/core',
-      root: '@material-ui/core',
-    },
   },
 };
 

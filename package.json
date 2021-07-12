@@ -7,6 +7,7 @@
   "homepage": "https://lluiscornejo.github.io/react-corni-slide",
   "scripts": {
     "clean": "rimraf dist",
+    "start": "cross-env NODE_ENV=development webpack --watch",
     "build": "cross-env NODE_ENV=production webpack && babel ./src --out-dir ./lib",
     "test-watch": "jest --watch",
     "test": "jest",
